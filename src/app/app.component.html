@@ -1,0 +1,67 @@
+<ng2-slim-loading-bar color="blue"></ng2-slim-loading-bar>
+<a class="navbar-brand" href="#">
+    <img src="assets/img/tekenlight.png"  class="logo" alt="">
+</a>
+<nav class="navbar navbar-expand-sm bg-light">
+  <div class="container-fluid">
+     
+    <ul class="navbar-nav" *ngIf="this.currentUrl !== '/companies/registeration' ||  this.currentUrl !== '/users'">
+      <!-- <li class="nav-item">
+        <a routerLink="business/create" class="nav-link" routerLinkActive="active">
+          Create Business/register
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="business" class="nav-link" routerLinkActive="active">
+          Business
+        </a>
+      </li> -->
+      
+            
+      
+         
+
+      <li *ngIf="this.currentUrl ==='/login'"class="nav-item">
+          <a routerLink="/login" class="nav-link" routerLinkActive="active">
+            Login
+          </a>
+      </li> 
+    </ul>
+    <ul class="navbar-nav" *ngIf="this.currentUrl == '/companies/registeration' || this.currentUrl == '/users' || this.currentUrl == '/success'">
+        <!-- <li class="nav-item">
+          <a routerLink="business/create" class="nav-link" routerLinkActive="active">
+            Create Business
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="business" class="nav-link" routerLinkActive="active">
+            Business
+          </a>
+        </li>-->
+        
+                <!-- <h5> Tekenlight Solutions Pvt Ltd </h5> -->
+        
+           
+        <li  class="nav-item" >
+            <a routerLink="/users" class="nav-link" routerLinkActive="active">
+               Register User
+            </a>
+        </li> 
+        <li  class="nav-item" >
+            <a routerLink="/companies" class="nav-link" routerLinkActive="active">
+             Companies
+            </a>
+        </li> 
+
+        <li  class="nav-item">
+            <a routerLink="companies/registeration" class="nav-link" routerLinkActive="active">
+               Register Company
+            </a>
+          </li>
+      </ul>
+  </div>
+</nav>
+<br />
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,27 @@
+.userForm{
+    font-size: 0.85rem !important;
+}
+.form-control{
+    height:1.8rem !important;
+    padding-top: 0.02rem !important;
+    padding-bottom: 0.02rem !important;
+    font-size: 0.85rem !important;
+}
+.section-headings{
+   color: #007bff;
+   font-weight: 600;
+   font-size: 0.95rem ;
+}
+.form-group.required :after { 
+    color: #d00;
+    content: "*";
+    position: absolute;
+    margin-left: 8px;
+    top:-3px;
+}
+.submit-button{
+    position:relative;
+    left:21rem;
+    
+
+}
