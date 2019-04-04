@@ -1,0 +1,26 @@
+{
+    "code_type":{
+
+            "company_class": [
+                                {"code": "PVT", "value": "Private Limited Company"},
+                                {"code": "LLP", "value": "Limited Liability Company"},
+                                {"code": "OPC", "value": "One Person Company"}
+                            ],
+            "company_category" : [
+                                {"code": "CLS", "value": "Company Limited by Shares"},
+                                {"code": "CLG", "value": "Company Limited by Guarantee"},
+                                {"code": "ULC", "value": "Unlimited Company"}
+                            ],
+            "company_sub_category" :  [
+                                {"code": "UGC", "value": "Union Government Company"},
+                                {"code": "SGC", "value": "State Government Company"},
+                                {"code": "NGC", "value": "Non-Government Company"},
+                                {"code": "SCI", "value": "Subsidary of company Incorpated Outside"},
+                                {"code": "GAC", "value": "Guarantee and Association Company"}
+                            ],
+          "company_status" :  [
+                                {"code": "ACT", "value": "Active"},
+                                {"code": "INA", "value": "Inactive"}
+                            ]
+        }
+}
