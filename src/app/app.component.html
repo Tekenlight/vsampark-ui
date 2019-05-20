@@ -2,10 +2,11 @@
 <a class="navbar-brand" href="#">
     <img src="assets/img/tekenlight.png"  class="logo" alt="">
 </a>
+
 <nav class="navbar navbar-expand-sm bg-light">
   <div class="container-fluid">
      
-    <ul class="navbar-nav" *ngIf="this.currentUrl !== '/companies/registeration' ||  this.currentUrl !== '/users'">
+    <ul class="navbar-nav" *ngIf="this.currentUrl !== '/companies/registeration' ||  this.currentUrl !== '/user-registration'">
       <!-- <li class="nav-item">
         <a routerLink="business/create" class="nav-link" routerLinkActive="active">
           Create Business/register
@@ -22,12 +23,12 @@
          
 
       <li *ngIf="this.currentUrl ==='/login'"class="nav-item">
-          <a routerLink="/login" class="nav-link" routerLinkActive="active">
+          <a routerLink="/login" class="nav-link" routerLinkActive="active" style="display: none;">
             Login
           </a>
       </li> 
     </ul>
-    <ul class="navbar-nav" *ngIf="this.currentUrl == '/companies/registeration' || this.currentUrl == '/users' || this.currentUrl == '/success'">
+    <ul class="navbar-nav" *ngIf="this.currentUrl == '/companies/registeration' || this.currentUrl == '/user-registration' || this.currentUrl == '/success'">
         <!-- <li class="nav-item">
           <a routerLink="business/create" class="nav-link" routerLinkActive="active">
             Create Business
@@ -43,7 +44,7 @@
         
            
         <li  class="nav-item" >
-            <a routerLink="/users" class="nav-link" routerLinkActive="active">
+            <a routerLink="/user-registration" class="nav-link" routerLinkActive="active">
                Register User
             </a>
         </li> 
@@ -62,6 +63,10 @@
   </div>
 </nav>
 <br />
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+
+<!-- <div class="container">  -->
+    <router-outlet></router-outlet>
+ <!-- </div> -->
+
+
+ 

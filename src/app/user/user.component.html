@@ -7,16 +7,24 @@
               <input type="text" class=" column col-md-6 form-control" formControlName="user_name" #user_name/>
         </div>
         <div *ngIf="userForm.controls['user_name'].invalid && (userForm.controls['user_name'].dirty || userForm.controls['user_name'].touched)">
-              <div *ngIf="userForm.controls['cin'].errors.required" class="alert alert-danger">
+              <div *ngIf="userForm.controls['user_name'].errors.required" class="alert alert-danger">
                  Contact Person Name is required.
               </div>
         </div>
         <div class="form-group required row">
               <label class="column col-md-4">Contact Number</label>
-              <input type="text" class=" column col-md-6 form-control" formControlName="contact_number" #company_name />
+              <!-- <input type="number" class=" column col-md-6 form-control" formControlName="contact_number" #contact_number/> -->
+              <international-phone-number class=" pl-0 pr-0 col-md-6 asterisk-remove" formControlName="contact_number" placeholder="Enter Mobile number" 
+                [maxlength]="14" [defaultCountry]="'in'" #contact_number name="contact_number" 
+                [allowedCountries]="['in']">
+              </international-phone-number>
+                <!-- <ngx-intl-tel-input #contact_number class="col-md-6 pl-0 pr-0 asterisk-remove"
+                  [cssClass]="'custom'" [onlyCountries]="['in']"
+                  [enableAutoCountrySelect]="true" name="contact_number" formControlName="contact_number">
+                </ngx-intl-tel-input> -->
           </div>
-          <div *ngIf="userForm.controls['contact_number'].invalid && (userForm.controls['contact_number'].dirty || userForm.controls['contact_number'].touched)" class="alert alert-danger">
-            <div *ngIf="userForm.controls['contact_number'].errors.required">
+          <div *ngIf="userForm.controls['contact_number'].invalid && (userForm.controls['contact_number'].dirty || userForm.controls['contact_number'].touched)" >
+            <div *ngIf="userForm.controls['contact_number'].errors.required" class="alert alert-danger">
                 Contact Number is required.
             </div>
           </div>
@@ -28,13 +36,24 @@
             <div *ngIf="userForm.controls['email_id'].errors.required" class="alert alert-danger">
                 Contact Email Id is required.
             </div>
+            <div *ngIf="form_controls.email_id.errors.email" class="alert alert-danger">
+                Please Enter a valid email address
+              </div>
          </div>
-         <div class="form-group pull-right">
+         <div class="form-group ">
             <button (click)="createUser()" 
                 [disabled]="userForm.pristine || userForm.invalid"
                 class="btn btn-primary submit-button">Register User
             </button>
          </div>
+         <div *ngIf="submit_button">
+            <!-- <app-success [message]="message"></app-success>-->
+            <div class="justify-content-md-center alert alert-info">
+             <b> {{message}}</b>
+            </div>
+           </div> 
       </div>
   </div>
+ 
 </form>
+

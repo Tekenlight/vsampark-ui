@@ -10,9 +10,11 @@ export class PicklistService {
   constructor(private http: HttpClient) {}
 
   fetchPicklist(): Observable<any> {
-    this.http.get(`${this.picklistURL}`)
+    this.http
+    .get(`${this.picklistURL}`)
     .subscribe(
-      results => this.contents = results);
-    return this.http.get(`${this.picklistURL}`)
+          results => this.contents = results
+    );
+    return this.http.get(`${this.picklistURL}`);
   }
 }
