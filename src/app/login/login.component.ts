@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['claim-company/',this.user_id]); 
       }
       else{
-        this.router.navigate(['reset-password/',this.user_id])
+        this.router.navigate(['change-password/',this.user_id])
       }
    });
  
