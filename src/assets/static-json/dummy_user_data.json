@@ -1,0 +1,83 @@
+{
+    "users":
+      [
+        {
+            "contact_number": "9888877774",
+            "email_id": "varsha@tekenlight.com",
+            "password": "qlw9irlml99",
+            "__v": 0,
+            "_id": "5cd94366aecbffe23ce094b1",
+            "user_type":"Corporate",
+            "company_id":"5cbef4ed5af3d218ec76755f",
+            "user_name":"ghi",
+            "company_name": "Tekenlight Solutions Pvt Ltd"
+        },
+        {
+            "contact_number": "9888877774",
+            "email_id": "sudheer@tekenlight.com",
+            "password": "qlw9irlml99",
+            "__v": 0,
+            "_id": "5cd94366aecbffe23ce094b1",
+            "user_type":"Corporate",
+            "company_id":"5cbef4ed5af3d218ec76755f",
+            "user_name":"sudheer",
+            "company_name": "Tekenlight Solutions Pvt Ltd"
+        },
+        {
+            "contact_number": "9888877774",
+            "email_id": "umadhar@tekenlight.com",
+            "password": "qlw9irlml99",
+            "__v": 0,
+            "_id": "5cd94366aecbffe23ce094b1",
+            "user_type":"Corporate",
+            "company_id":"5cbef4ed5af3d218ec76755f",
+            "user_name":"umadhar",
+            "company_name": "Tekenlight Solutions Pvt Ltd"
+        },
+        {
+            "contact_number": "9888877774",
+            "email_id": "varsha@tekenlight.com",
+            "password": "qlw9irlml99",
+            "__v": 0,
+            "_id": "5cd94366aecbffe23ce094b1",
+            "user_type":"Corporate",
+            "company_id":"5cbef4ed5af3d218ec76755f",
+            "user_name":"abc",
+            "company_name": "Tekenlight Solutions Pvt Ltd"
+        },
+        {
+            "contact_number": "9888877774",
+            "email_id": "varsha@tekenlight.com",
+            "password": "qlw9irlml99",
+            "__v": 0,
+            "_id": "5cd94366aecbffe23ce094b1",
+            "user_type":"Corporate",
+            "company_id":"5cbef4ed5af3d218ec76755f",
+            "user_name":"def",
+            "company_name": "Tekenlight Solutions Pvt Ltd"
+        },
+        {
+            "contact_number": "9888877774",
+            "email_id": "varsha@tekenlight.com",
+            "password": "qlw9irlml99",
+            "__v": 0,
+            "_id": "5cd94366aecbffe23ce094b1",
+            "user_type":"Corporate",
+            "company_id":"5cbef4ed5af3d218ec76755f",
+            "user_name":"ghi",
+            "company_name": "Tekenlight Solutions Pvt Ltd"
+        },
+        {
+            "contact_number": "9888877774",
+            "email_id": "varsha@tekenlight.com",
+            "password": "qlw9irlml99",
+            "__v": 0,
+            "_id": "5cd94366aecbffe23ce094b1",
+            "user_type":"Corporate",
+            "company_id":"5cbef4ed5af3d218ec76755f",
+            "user_name":"ghi",
+            "company_name": "Tekenlight Solutions Pvt Ltd"
+        }
+      ]
+      
+}

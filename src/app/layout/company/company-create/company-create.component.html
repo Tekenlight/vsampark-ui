@@ -1,0 +1,316 @@
+
+<app-page-header [heading]="'Company Registration'" [icon]="'fa-table'"></app-page-header>
+<ng-container *ngIf="(picklist$ | async) as picklist;">
+    <form [formGroup]="companyForm" class="companyForm pl-5" validate>
+      <div class="row">
+          <div class="col-md-6  col-sm-12">   
+            <p class ="section-headings">Company Details</p>
+            <div class="form-group row">
+                  <label class="column col-md-4">CIN</label>
+                  <input type="text" class=" column col-md-6 form-control" (keypress)="omit_char($event)" formControlName="cin" #cin/>
+              </div>
+                <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+                    <div *ngIf="form_controls.cin.errors?.maxlength && error_key_value[i].control_name==='cin'" 
+                        class="alert alert-info">{{error_key_value[i].error_message}}
+                    </div>
+                </ng-container>
+              <div class="form-group required row">
+                  <label class="column col-md-4">Company Name</label>
+                  <input type="text" class=" column col-md-6 form-control" formControlName="company_name" 
+                        #company_name required="true" />
+              </div>
+              <div *ngIf="companyForm.controls['company_name'].invalid && (companyForm.controls['company_name'].dirty || 
+                          companyForm.controls['company_name'].touched)" class="alert alert-danger">
+                  <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+                      <div *ngIf="companyForm.controls['company_name'].errors.required && error_key_value[i].control_name==='company_name'">
+                          {{error_key_value[i].error_message}}
+                      </div>
+                  </ng-container>
+             </div>
+              <div class="form-group required row">
+                <label class=" column col-md-4">Company Short Name </label>
+                <input type="text" class="column col-md-6 form-control" formControlName="company_short_name" #company_short_name/>
+              </div>
+              <div *ngIf="companyForm.controls['company_short_name'].invalid && (companyForm.controls['company_short_name'].dirty || 
+                         companyForm.controls['company_short_name'].touched)" >
+                  <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+                      <div *ngIf="companyForm.controls['company_short_name'].errors.required  && 
+                                 error_key_value[i].control_name==='company_short_name' && 
+                                 error_key_value[i].error_type==='required'" 
+                            class="alert alert-danger">{{error_key_value[i].error_message}}
+                      </div>
+                   </ng-container>
+              </div>
+                <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+                    <div *ngIf="form_controls.company_short_name.errors?.minlength  && 
+                               error_key_value[i].control_name==='company_short_name' && error_key_value[i].error_type==='minlength'" 
+                          class="alert alert-info">{{error_key_value[i].error_message}}
+                    </div>
+                </ng-container>
+              <div class = "form-group required row">
+                  <label class=" column col-md-4">Company Class</label>
+                  <!-- <select class="form-control column col-md-6" formControlName="company_class" #company_class>
+                      <option *ngFor="let item of picklist.code_type.company_class" [value]="item.code">{{item.value}}</option> 
+                  </select> --> <!--using select-->
+  
+                  <!-- <input list="picklist1" class="form-control column col-md-6" formControlName="company_class" #company_class>
+                    <datalist id="picklist1">   
+                        <option *ngFor="let item of picklist.code_type.company_class" value="{{item.value}}" [value]="item.code">{{item.value}}</option> 
+                    </datalist>  -->  <!--using Datalist-->
+                    
+                    <input id="typeahead-format" type="text" class="form-control column col-md-6" formControlName="company_class" 
+                            [ngbTypeahead]="company_class_search" [resultFormatter]="formatter" [inputFormatter]="formatter" 
+                            (selectItem)="getCode($event)" />
+                    
+            </div>
+            <div *ngIf="companyForm.controls['company_class'].invalid && (companyForm.controls['company_class'].dirty || 
+                        companyForm.controls['company_class'].touched)" >
+                        <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+                            <div *ngIf="companyForm.controls['company_class'].errors.required  && 
+                                        error_key_value[i].control_name==='company_class' && error_key_value[i].error_type==='required'" 
+                                  class="alert alert-danger"> {{error_key_value[i].error_message}}
+                            </div>
+                        </ng-container>
+            </div>
+            <div class = "form-group required row">
+                  <label class=" column col-md-4">Company Category</label>
+                  <!-- <input list="picklist2" class="form-control column col-md-6" formControlName="company_category" #company_category>
+                  <datalist id="picklist2"> 
+                      <option *ngFor="let item of picklist.code_type.company_category" value="{{item.value}}"[value]="item.code">{{item.value}}</option> 
+                  </datalist>  -->
+                  <input id="typeahead-format" type="text" class="form-control column col-md-6" formControlName="company_category" 
+                        [ngbTypeahead]="company_category_search" [resultFormatter]="formatter" [inputFormatter]="formatter" 
+                        (selectItem)="getCode($event)" /> 
+            </div>
+             <div *ngIf="companyForm.controls['company_category'].invalid && (companyForm.controls['company_category'].dirty || 
+                        companyForm.controls['company_category'].touched)" >
+                        <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+                            <div *ngIf="companyForm.controls['company_category'].errors.required  && 
+                                        error_key_value[i].control_name==='company_category' && error_key_value[i].error_type==='required'" 
+                                  class="alert alert-danger"> {{error_key_value[i].error_message}}
+                            </div>
+                        </ng-container>
+            </div>
+            <div class = "form-group required row">
+                <label class=" column col-md-4">Company Sub Category</label>
+                <!-- <input list="picklist3" class="form-control column col-md-6" formControlName="company_sub_category" #company_sub_category>
+                    <datalist id="picklist3">
+                        <option *ngFor="let item of picklist.code_type.company_sub_category" value="{{item.value}}" [value]="item.code">{{item.value}}</option> 
+                    </datalist> -->
+                    <input id="typeahead-format" type="text" class="form-control column col-md-6" formControlName="company_sub_category" 
+                    [ngbTypeahead]="company_sub_category_search" [resultFormatter]="formatter" [inputFormatter]="formatter" 
+                    (selectItem)="getCode($event)" />
+                  
+           </div>
+           <div *ngIf="companyForm.controls['company_sub_category'].invalid && (companyForm.controls['company_sub_category'].dirty || 
+                        companyForm.controls['company_sub_category'].touched)" >
+                        <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+                            <div *ngIf="companyForm.controls['company_sub_category'].errors.required  && 
+                                        error_key_value[i].control_name==='company_sub_category' && error_key_value[i].error_type==='required'" 
+                                  class="alert alert-danger"> {{error_key_value[i].error_message}}
+                            </div>
+                        </ng-container>
+            </div>
+           
+            <div class = "form-group required row">
+                <label class=" column col-md-4">Company Status</label>
+                <!-- <input list="picklist4" class="form-control column col-md-6" formControlName="company_status" #company_status>
+                    <datalist id="picklist4">  
+                        <option *ngFor="let item of picklist.code_type.company_status" value="{{item.value}}" data-value="item.code">{{item.value}}</option> 
+                    </datalist> -->
+                    <input id="typeahead-format" type="text" class="form-control column col-md-6" formControlName="company_status" 
+                    [ngbTypeahead]="company_status_search" [resultFormatter]="formatter" [inputFormatter]="formatter" 
+                    (selectItem)="getCode($event)" />
+            </div>
+             <div *ngIf="companyForm.controls['company_status'].invalid && (companyForm.controls['company_status'].dirty || 
+                        companyForm.controls['company_status'].touched)" >
+                        <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+                            <div *ngIf="companyForm.controls['company_status'].errors.required  && 
+                                        error_key_value[i].control_name==='company_status' && 
+                                        error_key_value[i].error_type==='required'" 
+                                  class="alert alert-danger"> {{error_key_value[i].error_message}}
+                            </div>
+                        </ng-container>
+            </div>
+    
+            <div class="form-group required row">,
+                <label class=" column col-md-4">Date of Incorporation </label>
+                <!-- <input  type="text" class=" column col-md-6 form-control" formControlName="date_of_incorporation" 
+                #date_of_incorporation/>  -->
+                <my-date-picker name="date_of_incorporation" [options]="myDatePickerOptions"
+                                class=" column col-md-6 pl-0 pr-0 datepicker"  formControlName="date_of_incorporation"
+                                (dateChanged)="onDateChanged($event)"
+                ></my-date-picker>
+            </div>
+             <div *ngIf="companyForm.controls['date_of_incorporation'].invalid && (companyForm.controls['date_of_incorporation'].dirty || 
+                        companyForm.controls['date_of_incorporation'].touched)" >
+                        <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+                            <div *ngIf="companyForm.controls['date_of_incorporation'].errors.required  && 
+                                        error_key_value[i].control_name==='date_of_incorporation' && 
+                                        error_key_value[i].error_type==='required'" 
+                                  class="alert alert-danger"> {{error_key_value[i].error_message}}
+                            </div>
+                        </ng-container>
+            </div>
+                    
+                  
+                
+           
+            <div class="form-group required row">
+                <label class=" column col-md-4"> Company Email Id </label>
+                <input type="text" class=" column col-md-6 form-control" formControlName="company_email_id" #company_email_id/>
+            </div>
+             <div *ngIf="companyForm.controls['company_email_id'].invalid && (companyForm.controls['company_email_id'].dirty || 
+                         companyForm.controls['company_email_id'].touched)" class="alert alert-danger">
+                    <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+                        <div *ngIf="companyForm.controls['company_email_id'].errors.required &&  
+                                        error_key_value[i].control_name==='company_email_id' &&
+                                        error_key_value[i].error_type==='required'">{{error_key_value[i].error_message}}
+                        </div>
+                    </ng-container>
+             
+                    <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+                        <div *ngIf="form_controls.company_email_id.errors.email &&  error_key_value[i].control_name==='company_email_id'
+                                    && error_key_value[i].error_type==='email'">{{error_key_value[i].error_message}}
+                        </div>
+                   </ng-container>    
+              </div>
+            
+             <p class ="section-headings">Registered Address</p>
+                <ng-container formGroupName="registered_address">
+                    <div class="form-group required row">
+                          <label class="column col-md-4"> Line 1 </label>
+                          <input type="text" class=" column col-md-6 form-control" formControlName="line1" #line1/>
+                    </div>
+                    <div class="form-group  required  row">
+                        <label class="column col-md-4"> Line 2 </label>
+                        <input type="text" class=" column col-md-6 form-control" formControlName="line2" #line2 />
+                    </div>
+                    <div class="form-group  required row">
+                        <label class=" column col-md-4"> City </label>
+                        <input type="text" class=" column col-md-6 form-control" formControlName="city" #city />
+                    </div>
+                    <div class="form-group required  row">
+                        <label class=" column col-md-4"> PINCODE </label>
+                        <input type="number" class=" column col-md-6 form-control" (keypress)="omit_char($event)" formControlName="pincode" #pincode/>
+                    </div>
+                </ng-container>
+       </div>
+       <div class="col-md-6">
+          <p class ="section-headings">Other Details</p>
+          <div class="form-group row">
+              <label class="column col-md-3"> PAN </label>
+              <input type="text" class=" column col-md-6 form-control" formControlName="pan" pattern="^[a-zA-Z0-9]*$"
+                (keypress)="omit_special_char($event)"#pan/>
+  
+          </div>
+          <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+              <div *ngIf="pan.value?.length> 10 &&  error_key_value[i].control_name==='pan'"  class="alert alert-info">
+                  {{error_key_value[i].error_message}}
+              </div>
+          </ng-container> 
+         
+          <div *ngIf="pan.errors?.pattern">Only Alphanumeric Characters are allowed.</div> 
+          <div class="form-group row">
+              <label class="column col-md-3"> TAN </label>
+              <input type="text" class=" column col-md-6 form-control" formControlName="tan" (keypress)="omit_special_char($event)"  #tan />
+          </div>
+          <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+              <div *ngIf="tan.value?.length > 10 &&  error_key_value[i].control_name==='tan'" class="alert alert-info">{{error_key_value[i].error_message}}</div>
+          </ng-container>
+              <div class="form-group row">
+              <label class=" column col-md-3"> TIN </label>
+              <input type="text" class=" column col-md-6 form-control" formControlName="tin" (keypress)="omit_special_char($event)" #tin />
+          </div>
+          <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+              <div *ngIf="tin.value?.length > 11 && error_key_value[i].control_name==='tin'" class="alert alert-info">{{error_key_value[i].error_message}}</div>
+          </ng-container>
+          <div class="form-group row">
+              <label class=" column col-md-3"> GSTIN </label>
+              <input type="text" class=" column col-md-6 form-control" formControlName="gstin" (keypress)="omit_special_char($event)" #gstin />
+          </div>
+          <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+             <div *ngIf="gstin.value?.length > 15 && error_key_value[i].control_name==='gstin'" class="alert alert-info">
+                  {{error_key_value[i].error_message}}
+             </div>
+          </ng-container>
+           <div class="form-group row">
+                <label class=" column col-md-3">Bank Acc Number</label>
+                <input type="text" class=" column col-md-6 form-control" formControlName="bank_account_number" #bank_account_number/>
+            </div>
+            <div class="form-group row">
+                <label class=" column col-md-3">  Bank Branch </label>
+                <input type="text" class=" column col-md-6 form-control" formControlName="bank_branch" #bank_branch />
+            </div>
+            <div class="form-group row">
+                <label class=" column col-md-3"> Bank IFSC Code</label>
+                <input type="text" class=" column col-md-6 form-control" formControlName="bank_ifsc_code" #bank_ifsc_code />
+            </div>
+            <div class="form-group required row">
+                 <label class=" column col-md-3">Contact Number </label>
+                 <input type="number" class=" column col-md-6 form-control" formControlName="contact_number" #contact_number (keypress)="omit_char($event)"/>
+            </div>
+            <div *ngIf="companyForm.controls['contact_number'].invalid && (companyForm.controls['contact_number'].dirty || companyForm.controls['contact_number'].touched)" class="alert alert-danger">
+                  <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+                       <div *ngIf="companyForm.controls['contact_number'].errors.required && error_key_value[i].control_name==='contact_number'">
+                          {{error_key_value[i].error_message}}
+                      </div>
+                  </ng-container>
+            </div>
+            <div class="form-group required row">
+                <label class=" column col-md-3">Email Id </label>
+                <input type="text" class=" column col-md-6 form-control" formControlName="email_id" #email_id/>
+            </div>
+            <div *ngIf="companyForm.controls['email_id'].invalid && (companyForm.controls['email_id'].dirty || 
+                        companyForm.controls['email_id'].touched)" class="alert alert-danger">
+                    <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+                        <div *ngIf="companyForm.controls['email_id'].errors.required  && error_key_value[i].control_name==='email_id'
+                                    && error_key_value[i].error_type==='required'">{{error_key_value[i].error_message}}
+                        </div>
+                    </ng-container>
+                    <ng-container *ngFor="let element of error_key_value,let i=index;"> 
+                        <div *ngIf="form_controls.email_id.errors.email &&  error_key_value[i].control_name==='email_id' &&
+                                    error_key_value[i].error_type==='email'">{{error_key_value[i].error_message}}
+                        </div>
+                    </ng-container>
+            </div>
+            <p class ="section-headings">Corporate Address</p>
+                <ng-container formGroupName="corporate_address">
+                      <div class="form-group row">
+                          <label class="column col-md-3"> Line 1 </label>
+                          <input type="text" class=" column col-md-6 form-control" formControlName="line1" #line1/>
+                        </div>
+                                
+                      <div class="form-group row">
+                          <label class="column col-md-3"> Line 2 </label>
+                          <input type="text" class=" column col-md-6 form-control" formControlName="line2" #line2 />
+                      </div>
+                                
+                      <div class="form-group row">
+                          <label class=" column col-md-3"> City </label>
+                          <input type="text" class=" column col-md-6 form-control" formControlName="city" #city />
+                      </div>
+                              
+                      <div class="form-group row">
+                          <label class=" column col-md-3"> PINCODE </label>
+                          <input type="number" class=" column col-md-6 form-control" (keypress)="omit_char($event)" formControlName="pincode" #pincode/>
+                      </div>
+                 </ng-container>
+          </div>
+       </div>{{companyForm.status}}
+       <div *ngIf="hasError">
+              {{error}}
+       </div>
+       <div class="form-group">
+            <button *ngIf="edit_mode===false" (click)="addCompany()" 
+                [disabled]="companyForm.invalid"
+                class="btn btn-primary submit-button">Register Company
+            </button>
+            <button *ngIf="edit_mode===true" (click)="editCompany()" 
+                [disabled]="companyForm.invalid"
+                class="btn btn-primary submit-button">Edit Company
+            </button>
+      </div>
+  </form>
+  </ng-container>
+  

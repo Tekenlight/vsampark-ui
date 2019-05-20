@@ -1,0 +1,58 @@
+ <div class="container">
+  <div class="justify-content-md-center">
+       <p class="pt-5">
+            A One-Time Password (OTP) will be sent to your registered phone number:- <b>{{contact_number}}</b> 
+            and email_id:- <b>{{corporate_email_id}}</b><br><br>
+       </p>    
+        <div class="form-group row">
+            <label class="column col-md-2 pt-2">Contact Number</label>
+            <input type="number" class="column col-md-2 form-control" [(ngModel)]="contact_number" />
+
+            <label class="column col-md-1 offset-md-1 pt-2">Email Id</label>
+            <input type="email" class="column col-md-2  form-control" [(ngModel)]="corporate_email_id" />
+                
+            <button (click)="generateOtp()" class="col-md-2  offset-md-1 btn btn-primary btn-company">Resend OTP</button>
+        </div>
+          <!-- <i class="fas fa-pen"></i> -->
+          <!-- <div class="col-sm-6 col-md-6 col-xs-12">  
+              <div class="form-group">  
+                <label>Fisrt Name:</label>  
+                <div class="input-group">  
+                  <div class="input-group-prepend">  
+                    <span class="input-group-text">  
+                        <i class="fas fa-pencil-alt" style="color:black"></i>
+                    </span>  
+                  </div>  
+                  <input id="name" type="text" class="form-control">  
+                </div>  
+              </div>  
+            </div>   -->
+            
+         
+          <p class="pt-2">Please enter the OTP  that you have received to verify your organisation.</p><br>
+          <div class="form-group row">
+              <label class="column col-md-1 pt-2">OTP</label>
+              <input type="number" class="column col-md-2 form-control" [(ngModel)]="otp" />
+               <button (click)="validateOtp()" class="col-md-2 offset-md-1 btn btn-primary btn-login">Validate OTP</button>
+          </div>
+          
+          <div *ngIf="isError" class="col-md-8 alert alert-danger">{{error}}</div>
+          <div class="form-group pt-2 row">
+                 <!-- <button (click)="generateOtp()" class="col-md-2 margin-one btn btn-primary btn-company"> Resend OTP</button> -->
+          </div>  
+          <p class="divider-text">
+              <span class="bg-light">OR</span>
+          </p>
+           <p> 
+                  Incase, you did not find your Organisation in the V Sampark Network of Corporates, 
+                  please click on the below button. 
+                  <br>
+                  <br>
+                  Someone from V Sampark will get in touch will you shortly at your email address <b>{{corporate_email_id}}</b>
+                  <br>
+                  <br>
+                  <button (click)="generateOtp" class="col-md-2 btn btn-primary btn-company">Request Access</button>
+          </p>   
+  </div>
+</div>
+  

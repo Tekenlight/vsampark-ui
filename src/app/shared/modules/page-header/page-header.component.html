@@ -1,0 +1,20 @@
+<div class="row pb-2">
+    <div>
+        <a class="navbar-brand pl-3 pt-0 pb-2" (click)="backClicked()" style="font-size:1.25rem;color:#607d8b;">
+           <!-- <div *ngIf="back_button"> -->
+                <i class="fa fa-arrow-left"></i>
+            <!-- </div>  -->
+        </a>
+    </div>
+    <div class="col-xl-11 col-md-11 col-sm-11">
+        <h4 class="page-header">
+            {{heading}}
+        </h4>
+        <!-- <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" [routerLink]="['/dashboard']">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active"><i class="fa {{icon}}"></i> {{heading}}</li>
+        </ol> -->
+    </div>
+</div>

@@ -1,0 +1,52 @@
+.companyForm{
+    font-size: 0.85rem !important;
+}
+.form-control{
+    height:1.8rem !important;
+    padding-top: 0.02rem !important;
+    padding-bottom: 0.02rem !important;
+    font-size: 0.85rem !important;
+}
+.section-headings{
+   color: #007bff;
+   font-weight: 600;
+   font-size: 0.95rem ;
+}
+.form-group.required :after { 
+    color: #d00;
+    content: "*";
+    position: absolute;
+    margin-left: 8px;
+    top:-3px;
+}
+.submit-button{
+    position:relative;
+    left:56.4rem;
+    background-color:#405D9D; 
+
+}
+.page-header{
+    color:#607d8b;
+    font-weight: 600;
+}
+
+.arrow-down {
+    width: 0; 
+    height: 0; 
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-top: 1px solid #888;
+  }
+//to remove the arrow up and arrow-down for input type--number
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+ 
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.datepicker:after{
+    color:#FFF!important; //to remove asterisk after the datepicker
+}

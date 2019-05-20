@@ -1,0 +1,12 @@
+{
+    "REQD" : {"error_code": "REQD", "error_message": "$fieldName is Required"},
+           
+    "LEN": {"error_code": "LEN", "error_message": "$fieldName should be of length $length"},
+                      
+    "ALN":  {"error_code": "ALN", "error_message": "$fieldName should be alphanumeric"},
+
+    "EMAIL" :  {"error_code": "EMAIL", "error_message": "$fieldName should be a valid email"},
+    
+    "NAME_INVALID" : {"error_code": "NAME_INVALID", "error_message": "$firstName & $lastName should not be same"}
+                              
+}

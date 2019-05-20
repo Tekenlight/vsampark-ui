@@ -1,0 +1,40 @@
+<app-page-header [heading]="'Generate Otp'" [icon]="'fa-table'"></app-page-header>
+ 
+ <div class="container">
+  <div class="justify-content-md-center pt-2">
+      <article class="card-body mx-auto card bg-light col-md-10" >
+       <p>
+            A One-Time Password (OTP) will be sent to your registered phone number:- <b>{{contact_number}}</b> 
+            and email_id:- <b>{{email_id}}</b><br><br>
+       </p> 
+       <p class="pt-2">Please enter the OTP  that you have received to verify your organisation.</p><br>
+          <div class="form-group row">
+              <label class="column col-md-1 pt-2">OTP</label>
+              <input type="number" class="column col-md-2 form-control" [(ngModel)]="otp" />
+               <button (click)="validateOtp()" class="col-md-2 offset-md-1 btn btn-primary btn-login">Validate OTP</button>
+               <button (click)="generateOtp()" class="col-md-2 offset-md-1 btn btn-primary btn-company">Resend OTP</button> 
+          </div>
+          
+          <div *ngIf="isError" class="col-md-8 alert alert-danger">{{error}}</div>
+        
+          <p class="divider-text">
+              <!-- <span class="bg-light"></span> -->
+          </p>   
+
+          <p class="pt-2">In case you want to change your contact number/ email id, please enter below.</p><br>
+        <div class="form-group row">
+           
+            <label class="column col-md-3 pt-2">Contact Number</label>
+            <input type="number" class="column col-md-2 form-control" [(ngModel)]="contact_number" />
+
+            <label class="column col-md-2 offset-md-1 pt-2">Email Id</label>
+            <input type="email" class="column col-md-3  form-control" [(ngModel)]="email_id" />
+        </div>
+         
+         
+         
+          
+      </article>
+  </div>
+</div>
+  

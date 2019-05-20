@@ -1,0 +1,79 @@
+<!-- 
+<ng-container class="modal-view" *ngFor="let col of cols">
+   {{col.label}} : {{company[col.field]}} <br>
+</ng-container> -->
+
+<!-- <ng-template #content let-d="dismiss">   -->
+     <div class="modal-header" >
+        Company Details
+         <!-- <button type="button" class="close" aria-label="Close" (click)="onClose()">
+               <span aria-hidden="true">&times;</span>
+         </button>  -->
+   </div> 
+   <div class="modal-body">
+     <ng-container  *ngFor="let col of cols" >
+         <div *ngIf="col.field == 'registered_address' then nested_object_content else normal_content" ></div> <!--nested object-->
+         
+         <ng-template #normal_content>
+               <div class="row justify-content-md-center justify-content-sm-center pt-2">
+                     <div class="col-md-3 col-sm-3">
+                        {{col.label}}  
+                     </div>
+                     <div class="col-md-1 col-sm-1">
+                        : 
+                     </div>
+                     <div class="col-md-6 col-sm-6">
+                     <div *ngIf="company[col.field] ===''|| company[col.field] === null then hyphen else not_hyphen"> </div>
+                     
+                     <ng-template #hyphen>
+                         -
+                     </ng-template>
+                     <ng-template #not_hyphen>
+                           <div *ngIf="col.type ==='normal' || col.type ==='typeahead'  then normal else date"></div>
+                           <ng-template #normal>
+                                 {{company[col.field] }} 
+                           </ng-template>
+                           <ng-template #date>
+                                 {{company[col.field] | date: 'dd-MM-yyyy' }} 
+                           </ng-template>
+                        
+                     </ng-template>
+                     
+                     <div *ngIf="col.field == 'company_category' then typeahead1"> </div>
+                     <div *ngIf="col.field == 'company_sub_category' then typeahead2"> </div>
+                     <div *ngIf="col.field == 'company_class' then typeahead3"> </div>
+                     <div *ngIf="col.field == 'company_status' then typeahead4"> </div>
+                        
+                        <ng-template #typeahead1>
+                            - {{company_category_view_value}}
+                        </ng-template>
+                        <ng-template #typeahead2>
+                             - {{company_sub_category_view_value}}
+                        </ng-template>
+                        <ng-template #typeahead3>
+                              - {{company_class_view_value}}
+                        </ng-template>
+                        <ng-template #typeahead4>
+                              - {{company_status_view_value}}
+                        </ng-template>
+                     
+                     </div>
+               </div>
+         </ng-template>
+         <ng-template #nested_object_content>
+               <div class="row justify-content-md-center justify-content-sm-center pt-2">
+                     <div class="col-md-3 col-sm-3">
+                        {{col.label}} 
+                     </div>
+                     <div class="col-md-1 col-sm-1">
+                        : 
+                        </div>
+                     <div class="col-md-6 col-sm-6">
+                        {{company[col.field].line1}}  {{company[col.field].line2}}  {{company[col.field].city}}  {{company[col.field].pincode}}
+                     </div>
+               </div>
+         </ng-template>
+      </ng-container>
+      </div>
+<!-- </ng-template>  -->
+

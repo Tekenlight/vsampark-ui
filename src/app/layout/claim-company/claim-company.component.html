@@ -1,0 +1,49 @@
+<app-page-header [heading]="'Claim Your Organisation'" [icon]="'fa-table'"></app-page-header>
+ <div class="row justify-content-md-center">
+   
+        <form [formGroup]="form" class="companyForm" validate>
+            <p class="pt-5">
+                    You have been successfully logged into V Sampark Network.You are currently not a part any organisation, 
+                    
+                    in the V Sampark Network. 
+                    <br>
+                    <br>
+                    To claim your 
+                    Organisation , please type in your Organisation name :
+                <br>
+                <br>
+            </p>
+            <input id="typeahead-format" type="text" class="form-control column col-md-7" 
+            formControlName="company_name" [ngbTypeahead]="company_search" 
+            [resultFormatter]="formatter" [inputFormatter]="formatter" /> 
+            <br>
+            <button (click)="claimCompany()" 
+                [disabled]="form.pristine || form.invalid"
+                class="btn column col-md-2 btn-primary submit-button">Claim Company
+            </button>
+            <div *ngIf="has_been_claimed" class="alert alert-info pt-3 mt-3">
+                <b>This Organisation has already been claimed. You cannot re-claim this organisation.</b>
+            </div>
+            <div *ngIf="not_in_db" class="alert alert-info pt-3 mt-3">
+               <b>  The Organisation is not currently present in V Sampark Network of Corporates.</b>
+            </div>
+            <p class="pt-3"> 
+                    Incase, you did not find your Organisation in the above list of V Sampark Network of Corporates, 
+                    please click on the below button. 
+                    <br>
+                    <br>
+                    Someone from V Sampark will get in touch will you shortly at your email address <b>{{user_email_id}}</b>
+                    <br>
+                    <br>
+                    <button (click)="add_company()" class="col-md-2 btn btn-primary btn-company">Add Company</button><br><br><br>
+                    <span *ngIf="add_button" class="alert alert-info pt-3 mt-3">
+                        <b>{{request_message}} </b>
+                    </span>
+            </p>   
+            
+           
+        </form>
+   
+</div> 
+
+    
