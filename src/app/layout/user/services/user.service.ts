@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { RequestOptions,Headers } from '@angular/http';
 import { User } from '../model/user.model';
+import { JwtService } from 'src/app/common/services/jwt.service';
 
 
 @Injectable({
@@ -19,7 +20,16 @@ export class UserService {
  
   getAllUsersUrl='http://localhost:3000/users/'
   //getAllUsersUrl='http://localhost:4200/assets/static-json/dummy_user_data.json'
-  constructor(private http: HttpClient) { }
+  constructor(private http : HttpClient, private jwtService : JwtService) { }
+   headersConfig
+  
+   private setHeaders(): Headers {
+   if (this.jwtService.getToken()) {
+         this.headersConfig['x-access-token'] = ` ${this.jwtService.getToken()}`;
+         console.log(this.headersConfig)
+       }
+         return new Headers(this.headersConfig);
+       }
 
   secret = 'BSQ-Slt-007';
 

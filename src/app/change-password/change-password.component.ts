@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../user/services/user.service';
+import { JwtService } from '../common/services/jwt.service';
 
 @Component({
   selector: 'change-password',
@@ -18,7 +19,7 @@ export class ChangePasswordComponent implements OnInit {
   has_error:boolean=false;
   error_message:string;
   constructor(private formBuilder: FormBuilder,private router: Router,private userService:UserService, 
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute, private jwtService: JwtService) { }
 
   get form_controls(){
     return this.resetPasswordForm.controls;
@@ -35,8 +36,10 @@ export class ChangePasswordComponent implements OnInit {
   this.activatedRoute.params.subscribe((params:any) => {
     this.user_id=params.id
   })
+  console.log(this.jwtService.getToken());
   }
  change_password(){
+  
   const credentials:any={
     //  password:this.resetPasswordForm.get('password').value,
      new_password:this.resetPasswordForm.get('new_password').value

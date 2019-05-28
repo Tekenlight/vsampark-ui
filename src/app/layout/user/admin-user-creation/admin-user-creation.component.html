@@ -21,8 +21,8 @@
               [allowedCountries]="['in']">
             </international-phone-number>
           </div>
-          <div *ngIf="userForm.controls['contact_number'].invalid && (userForm.controls['contact_number'].dirty || userForm.controls['contact_number'].touched)" class="alert alert-danger">
-            <div *ngIf="userForm.controls['contact_number'].errors.required">
+          <div *ngIf="userForm.controls['contact_number'].invalid && (userForm.controls['contact_number'].dirty || userForm.controls['contact_number'].touched)">
+            <div *ngIf="userForm.controls['contact_number'].errors.required"  class="alert alert-danger">
                 Contact Number is required.
             </div>
           </div>

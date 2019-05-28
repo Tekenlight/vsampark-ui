@@ -12,7 +12,8 @@ export class UserService {
 
   //userCreationUrl ='http://localhost:3000/users';
   getUserUrl ='http://localhost:3000/users';
-  userLoginUrl ='http://localhost:3000/users/login'
+  //userLoginUrl ='http://localhost:3000/users/login'
+  userLoginUrl ='http://localhost:3000/auth/login'
   userCreationUrl ='http://localhost:3000/users/';     
   //userCreationUrl ='http://localhost:4200/users';
   getAllUsersUrl='http://localhost:3000/users/getusers'
@@ -25,13 +26,14 @@ export class UserService {
               this.http.post(`${this.uri}`, user)
               .subscribe(res => console.log('Done',res))
       }
-      login(user){
+      login(user):Observable<any>{
         return this.http.post(`${this.userLoginUrl}`, user)
               //.subscribe(res => console.log('Done',res))
       }
       reset_password(credentials:any,id:string):Observable<any>{
       
-        return this.http.put(`${this.resetPasswordUrl}`+id, credentials)
+        //return this.http.put(`${this.resetPasswordUrl}`+id, credentials)
+        return this.http.put(`${this.resetPasswordUrl}`, credentials)
                         //.subscribe(res => console.log('Done',res));
       }
       saveUser(login):Observable<any>{

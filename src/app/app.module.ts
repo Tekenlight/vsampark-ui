@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -44,13 +44,13 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { JwtService } from './common/services/jwt.service';
+import { TokenInterceptor } from './common/auth-headers/token_interceptor'
 
 export const reducers: ActionReducerMap<any> = {
     companies: companyReducer.reducer,
     users: userReducer.reducer
   };
-
-
 
 @NgModule({
     imports: [
@@ -89,7 +89,19 @@ export const reducers: ActionReducerMap<any> = {
         ChangePasswordComponent,
         
     ],
-    providers: [AuthGuard,PicklistService,DataStorage,MessageFormatter,ErrorService],
+    providers: [
+                {
+                    provide:  HTTP_INTERCEPTORS, 
+                    useClass: TokenInterceptor,
+                    multi: true
+                },
+                AuthGuard,
+                PicklistService,
+                DataStorage,
+                MessageFormatter,
+                ErrorService,
+                JwtService,
+    ],
     bootstrap: [AppComponent],
     entryComponents:[CompanyViewComponent]
 })

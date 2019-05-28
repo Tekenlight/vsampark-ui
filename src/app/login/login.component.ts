@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { UserService } from '../user/services/user.service';
 import { Observable } from 'rxjs';
+import { JwtService } from '../common/services/jwt.service';
 
 
 @Component({
@@ -18,8 +19,10 @@ export class LoginComponent implements OnInit {
   email_id:string;
   password:string;
   user_id:any;
+  token:string 
   navigationExtras: NavigationExtras 
-  constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private userService:UserService,private router: Router) {
+  constructor(private formBuilder: FormBuilder,private route: ActivatedRoute,private userService:UserService,private router: Router,
+              private jwt_service: JwtService) {
     this.loginForm = this.formBuilder.group({
       email_id : ['', [Validators.email,Validators.required]],
       password : ['', Validators.required],
@@ -49,6 +52,8 @@ export class LoginComponent implements OnInit {
  
     this.userService.login(login).subscribe((response:any) => {
       this.user_id=response.UserObject._id;
+      this.jwt_service.saveToken(response.token)
+      console.log("Local Storage",localStorage)
       console.log("Response Received",response, this.user_id)
       if(response.UserObject.user_status=="Confirmed"){
         this.router.navigate(['claim-company/',this.user_id]); 
