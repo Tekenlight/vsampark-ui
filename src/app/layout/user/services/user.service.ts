@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { RequestOptions,Headers } from '@angular/http';
@@ -52,10 +52,23 @@ export class UserService {
       getUserbyId(id):Observable<any>{
         return this.http.get(`${this.getUserUrl}/`+id)
       }
-      getAllUsers(pageIndex?:number):Observable<any>{
-        return this.http.get(`${this.getAllUsersUrl}`)
+      getAllUsers(pageIndex?):Observable<any>{
+        let params=new HttpParams();
+        params=params.append('limit','10');
+        params=params.append('pageIndex',pageIndex);
+        if(pageIndex!=null){
+          return this.http.get(`${this.getAllUsersUrl}`,{params:params});
+        }
+        else{
+          return this.http.get(`${this.getAllUsersUrl}`)
+        }
       }
       updateUser(user):Observable<any>{
         return this.http.put(`${this.getAllUsersUrl}`+user._id,user)
       }
+
+      search_user(search_term):Observable<any>{
+        return this.http.get(`${this.getAllUsersUrl}`, {params: {search_term: search_term }})
+      }
+      
 }

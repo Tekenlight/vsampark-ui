@@ -20,6 +20,7 @@ const routes: Routes = [
             { path: 'users', loadChildren: './user/user-list/user-list.module#UserListModule' },
             { path: 'admin-user-creation', loadChildren: './user/admin-user-creation/admin-user-creation.module#AdminUserCreationModule' },
             { path: 'user/edit/:id', loadChildren: './user/admin-user-creation/admin-user-creation.module#AdminUserCreationModule' },
+            { path: 'user-company-linkages', loadChildren: './user-company-list/user-company-list.module#UserCompanyListModule' },
         ]
     }
 ];

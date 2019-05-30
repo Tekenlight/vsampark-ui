@@ -1,0 +1,29 @@
+<!-- <p-dialog [(visible)]="display" modal="modal" [responsive]="true" 
+  (onAfterHide)="onClose()">
+   <p>Works!</p>
+</p-dialog> -->
+
+
+<!-- <ng-template #content let-modal>   -->
+    <!-- <div class="modal-header" >
+        Company Details
+         <button type="button" class="close" aria-label="Close" (click)="onClose()">
+               <span aria-hidden="true">&times;</span>
+         </button> 
+   </div>  -->
+   <form [formGroup]="form">
+    <div class="modal-body">
+      <div class="row">
+        <label class="column col-md-2">Company Name</label>
+        <input id="typeahead-format" type="text" class="ml-3 form-control column col-md-7" 
+        formControlName="company_name" [ngbTypeahead]="company_search" 
+        [resultFormatter]="company_formatter" [inputFormatter]="company_formatter"/> 
+   
+        <!-- <ng-template #content let-modal>  -->
+          <button type="button"  class="ml-3 pt-0 pb-0 btn btn-primary column col-md-2" (click)="save()" (click) ="close_dialog()" >Link</button>
+         <!-- </ng-template> -->
+      </div>
+    </div>
+   </form>
+ <!-- </ng-template>  -->
+

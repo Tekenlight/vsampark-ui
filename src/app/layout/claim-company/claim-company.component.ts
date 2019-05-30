@@ -30,7 +30,7 @@ export class ClaimCompanyComponent implements OnInit {
   user_email_id:string;
   claim_message:string;
   has_been_claimed:boolean=false;
-  not_in_db:boolean=false;;
+  not_in_db:boolean=false;
   user$: Observable<any>;
   company_name_searched:string;
   request_message:string;

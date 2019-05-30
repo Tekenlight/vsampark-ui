@@ -1,0 +1,62 @@
+<div>
+  <app-page-header [heading]="'List of Users linked to companies'" [icon]="'fa-table'"></app-page-header>
+  <div *ngIf="company_not_in_db" class="alert alert-danger pt-3 mt-3">
+      <b> {{company_name_not_in_db_error_message}}</b>
+   </div>
+   <div *ngIf="user_not_in_db" class="alert alert-danger pt-3 mt-3">
+      <b> {{user_name_or_email_id_not_in_db_error_message}}</b>
+   </div>
+    <div class="ui-helper-clearfix" style="width:100%">
+      <button type="button"  class="btn btn-primary submit-button" style="float:right; margin-bottom: 1rem;" (click)="show_dialog_to_add()" label="Add Linkage">Add Linkage</button>
+    
+    </div>
+   <p-table #datatable [value]="user_to_company_linkages" [paginator]="true" [rows]="10"   [lazy]="true" 
+            (onLazyLoad)="fetchPageWise($event)" (onPage)="paginate($event)" [responsive]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                  <th *ngFor="let col of cols" >
+                      {{col.header}}
+                      <i class="fa fa-sort" style="font-size:15px;color:rgb(31, 23, 68);cursor: pointer"(click)="sort_function(col.field)" ></i>
+                  </th>
+                  <th>Actions</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user_company let-i="rowIndex">
+                <tr>
+                  <td *ngFor="let col of cols;">
+                      {{user_company[col.field]}} 
+                     
+                  </td>
+                 <td>
+                  <i class="fa fa-trash" style="font-size:30px;color:rgb(196, 55, 55);cursor: pointer"(click)="delete_linkage(user_company,i)" ></i>
+                  &nbsp;  &nbsp;
+                 </td>
+                </tr>
+             </ng-template>
+    </p-table>
+    <p-dialog header="Add Linkage" [(visible)]="display_dialog" [responsive]="true" showEffect="fade" [modal]="true"  width="550">
+      <form [formGroup]="form">
+      <div class="ui-grid ui-grid-responsive ui-fluid">
+          <div class="ui-grid-row">
+            <!-- <div class="form-group required"> -->
+                <label class=" column col-md-3">User Name / Email Id</label>
+                <input id="typeahead-format" type="text" class="form-control column col-md-8" 
+                formControlName="user_email_id" [ngbTypeahead]="user_search" 
+                [resultFormatter]="user_formatter" [inputFormatter]="user_formatter" /> 
+            <!-- </div> -->
+          </div>
+        <br>
+          <div class="ui-grid-row">
+              <label class="column col-md-3">Company Name</label>
+              <input id="typeahead-format" type="text" class="form-control column col-md-8" 
+                formControlName="company_name" [ngbTypeahead]="company_search" 
+                [resultFormatter]="company_formatter" [inputFormatter]="company_formatter" /> 
+            </div>
+      </div>
+      <p-footer>
+          <button type="button" [disabled]="form.pristine || form.invalid"  class="btn btn-primary submit-button" (click)="save()" >Save</button> 
+      </p-footer>
+      </form>
+  </p-dialog>
+  
+</div>

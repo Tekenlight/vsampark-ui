@@ -45,7 +45,10 @@ import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { JwtService } from './common/services/jwt.service';
-import { TokenInterceptor } from './common/auth-headers/token_interceptor'
+import { TokenInterceptor } from './common/auth-headers/token_interceptor';
+import { CompanyLinkageDialogComponent } from './layout/user/company-linkage-dialog/company-linkage-dialog.component';
+import { DialogModule } from 'primeng/dialog';
+
 
 export const reducers: ActionReducerMap<any> = {
     companies: companyReducer.reducer,
@@ -70,6 +73,7 @@ export const reducers: ActionReducerMap<any> = {
         AngularFontAwesomeModule,
         FlexLayoutModule,
         MenuModule,
+        DialogModule,
         LanguageTranslationModule,
         StoreModule.forRoot(reducers),
         EffectsModule.forRoot([CompanyEffects,UserEffects]),

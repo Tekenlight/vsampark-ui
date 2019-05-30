@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -44,7 +44,10 @@ export class UserService {
       getUserbyId(id):Observable<any>{
             return this.http.get(`${this.getUserUrl}/`+id)
       }
-      getAllUsers():Observable<any>{
+      getAllUsers(pageIndex?):Observable<any>{
+        let params=new HttpParams();
+        params=params.append('limit','10');
+        params=params.append('pageIndex',pageIndex);
         return this.http.get(`${this.getAllUsersUrl}`)
       }
 }

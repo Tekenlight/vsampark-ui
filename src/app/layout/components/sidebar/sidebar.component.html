@@ -24,6 +24,10 @@
             <i class="fa fa-fw fa-edit"></i>&nbsp;
             <span>{{ 'Add Users' }}</span>
         </a>
+        <a [routerLink]="['/user-company-linkages']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-table"></i>&nbsp;
+            <span>{{ 'Manage User Company'}} <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{'Linkages' }}</span>
+        </a>
         <a [routerLink]="['/claim-company']"  [routerLinkActive]="['router-link-active']"  class="list-group-item">
             <i class="fa fa-fw fa-edit"></i>&nbsp;
             <span>{{ 'Claim Company '}}</span>

@@ -6,4 +6,5 @@ export interface User{
     company_id?:string;
     company_name?:string;
     password?:string;
+    _id?:string;
 }

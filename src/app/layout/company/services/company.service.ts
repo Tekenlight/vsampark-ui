@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Http, Response, Headers,RequestOptions,Request, RequestMethod } from '@angular/http'
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +75,10 @@ addCompany(company){
              .http
              .delete(`${this.uri}`+company._id, company)
              .subscribe(res => console.log('Done',res))
+    }
+  
+  search_company(search_term):Observable<any>{
+      return this.http.get(`${this.uri}`, {params: {search_term: search_term }})
     }
 }
 

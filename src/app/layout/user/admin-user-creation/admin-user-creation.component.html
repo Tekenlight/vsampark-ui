@@ -38,7 +38,7 @@
          <div class="form-group required row">
             <label class=" column col-md-4">User Type</label>
             <select class="form-control column col-md-6" formControlName="user_type" #user_type>
-                <option>Corporate</option> 
+                <option>Business User</option> 
                 <option>V Sampark Administrator</option> 
             </select>
         </div>
@@ -46,12 +46,7 @@
           <div *ngIf="userForm.controls['user_type'].errors.required" class="alert alert-danger">
              User Type is required.
           </div>
-       </div>
-       <div *ngIf="userForm.controls['user_type'].invalid && (userForm.controls['user_type'].dirty || userForm.controls['user_type'].touched)" >
-          <div *ngIf="userForm.controls['user_type'].errors.required" class="alert alert-danger">
-             User Type is required.
-          </div>
-       </div>
+        </div>
         <div class="form-group required row">
             <label class=" column col-md-4">Company Name</label>
             <input id="typeahead-format" type="text" class="form-control column col-md-6" 

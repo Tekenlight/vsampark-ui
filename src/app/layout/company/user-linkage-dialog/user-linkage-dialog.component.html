@@ -1,0 +1,12 @@
+ <form [formGroup]="form">
+    <div class="modal-body">
+        <div class="row">
+            <label class=" column col-md-3">User Name / Email Id</label>
+            <input id="typeahead-format" type="text" class="form-control column col-md-6" 
+            formControlName="user_email_id" [ngbTypeahead]="user_search" 
+            [resultFormatter]="user_formatter" [inputFormatter]="user_formatter" /> 
+           <button type="button"  class="ml-3 pt-0 pb-0 btn btn-primary column col-md-2" (click)="save()" (click) = "close_dialog()" >Link</button>
+         
+        </div>
+    </div>
+</form>
