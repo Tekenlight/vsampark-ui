@@ -45,9 +45,16 @@
                                         <input id="typeahead-format" type="text" class="form-control" 
                                             formControlName="company_name" [ngbTypeahead]="company_search" 
                                             [resultFormatter]="company_formatter" [inputFormatter]="company_formatter" /> 
-                                        <br>
+                                       <br>
                                        <button type="button" [disabled]="form.pristine || form.invalid"  class="btn btn-primary" (click)="save()">Link</button>
-                                    
+                                       <br>
+                                       <div *ngIf="duplicate_entry_error" class="alert alert-danger pt-3 mt-3">
+                                            <b> {{duplicate_entry_error_message}}</b>
+                                        </div>
+                                        <div *ngIf="company_not_in_db" class="alert alert-danger pt-3 mt-3">
+                                            <b> {{company_name_not_in_db_error_message}}</b>
+                                         </div>
+
                                     </form>
                               </div>
                             </td>

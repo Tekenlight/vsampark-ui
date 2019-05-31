@@ -38,6 +38,8 @@ export class UserCompanyListComponent implements OnInit {
   user_name_or_email_id_searched:string;
   company_name_not_in_db_error_message:string;
   user_name_or_email_id_not_in_db_error_message:string;
+  duplicate_entry_error:boolean=false;
+  duplicate_entry_error_message:string;
 
   constructor(private user_company_service:UserCompanyService, private company_service:CompanyService,
               private formBuilder: FormBuilder, private user_service:UserService) {
@@ -128,6 +130,7 @@ export class UserCompanyListComponent implements OnInit {
    this.display_dialog = true;
    this.company_not_in_db=false;    //to remove error messages on dialog open
    this.user_not_in_db=false; 
+   this.duplicate_entry_error=false;
    this.form.reset();
 }
 
@@ -144,7 +147,7 @@ save() {
       this.user_name_or_email_id_not_in_db_error_message="The UserName/Email-Id you typed in, did not exist in V Sampark Group of Corporates.Hence the linkage could not be made."
    } 
     if((!this.company_not_in_db)||
-        (!this.company_not_in_db)){
+        (!this.user_not_in_db)){
           user_company_obj_to_be_saved={
               company_id: this.company_id_value,
               company_name: this.company_name_value,
@@ -153,16 +156,27 @@ save() {
               user_name: this.user_name_value,
               user_role: "Business User",
         }
-     user_company_obj_previous_state.push(user_company_obj_to_be_saved)
+    
      this.user_company_service.create_user_company_linkage(user_company_obj_to_be_saved)
-     .subscribe(res => console.log('Done',res))
+     .subscribe(res => {
+      if(res.status==200){
+        user_company_obj_previous_state.push(user_company_obj_to_be_saved)
+       }
+     },
+      err => {
+        console.log(err);
+      // check error status code is 500 & if it is a duplicate record
+      if((err.status==500)&&(err.error.error_message)){
+        console.log(err.status)
+        this.duplicate_entry_error=true;
+        this.duplicate_entry_error_message=err.error.error_message;
+      }
+     });
     }
    
-
-    this.user_to_company_linkages = user_company_obj_previous_state;
- 
+    this.user_to_company_linkages = user_company_obj_previous_state; //to show the added entry in the table
     this.display_dialog = false;
-    console.log("user_to_company_linkages",this.user_to_company_linkages)
+    
 }
 fetchPageWise(event){
   this.pageIndex = event.first/event.rows

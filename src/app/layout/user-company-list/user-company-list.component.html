@@ -6,6 +6,9 @@
    <div *ngIf="user_not_in_db" class="alert alert-danger pt-3 mt-3">
       <b> {{user_name_or_email_id_not_in_db_error_message}}</b>
    </div>
+    <div *ngIf="duplicate_entry_error" class="alert alert-danger pt-3 mt-3">
+      <b> {{duplicate_entry_error_message}}</b>
+   </div>
     <div class="ui-helper-clearfix" style="width:100%">
       <button type="button"  class="btn btn-primary submit-button" style="float:right; margin-bottom: 1rem;" (click)="show_dialog_to_add()" label="Add Linkage">Add Linkage</button>
     

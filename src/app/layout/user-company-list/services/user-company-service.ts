@@ -19,7 +19,9 @@ export class UserCompanyService {
 
       create_user_company_linkage(user_company:UserCompany):Observable<any>{
         console.log("Service -->",user_company)
-        return this.http.post(`${this.uri}`, user_company)
+        return this.http.post(`${this.uri}`, user_company,{ observe: 'response' }) //{ observe: 'response' }:- to read the full response 
+                                                                                    //including the status code(on subscription,we can get response status code).
+                                                                                    // This gives access to a response of type HttpResponse:
             //.subscribe(res => console.log('Done',res))
       }
      get_all_user_company_linkages(pageIndex?:number):Observable<any>{

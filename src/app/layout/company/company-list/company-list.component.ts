@@ -50,8 +50,11 @@ export class CompanyListComponent implements OnInit {
   row_selected:number;
   user_not_in_db:boolean=false;
   company_not_in_db:boolean=false;
+  user_name_or_email_id_not_in_db_error_message:string;
   company_name_searched:string;
   user_name_or_email_id_searched:string;
+  duplicate_entry_error:boolean=false;
+  duplicate_entry_error_message:string;
 
   constructor(private companyService: CompanyService,private _company_data: DataStorage,public router:Router,
     private modalService: NgbModal,private formBuilder: FormBuilder, private user_service:UserService, 
@@ -165,7 +168,8 @@ export class CompanyListComponent implements OnInit {
       this.form.get('user_email_id').valueChanges.subscribe(
           user_name_or_email_id_searched=>{
             this.user_name_or_email_id_searched=user_name_or_email_id_searched;
-                                                
+            this.duplicate_entry_error=false;
+            this.user_not_in_db=false; //to remove error when user types back(in case there has been a duplicate entry error displayed)                                   
           })
    }
 
@@ -201,6 +205,7 @@ export class CompanyListComponent implements OnInit {
      
   if (!(this.user_name_and_email_array.includes(this.user_name_or_email_id_searched))){
       this.user_not_in_db=true;
+      this.user_name_or_email_id_not_in_db_error_message="The UserName/Email-Id you typed in, did not exist in V Sampark Group of Corporates.Hence the linkage could not be made."
     } 
     if(!this.user_not_in_db){   
       let user_company_obj_to_be_saved:UserCompany
@@ -213,8 +218,20 @@ export class CompanyListComponent implements OnInit {
         user_role: "Business User",
       }
       this.user_company_service.create_user_company_linkage(user_company_obj_to_be_saved)
-      .subscribe(res => console.log('Done',res))
-      this.router.navigateByUrl('/user-company-linkages')
+      .subscribe(res =>{
+                           if(res.status==200){
+                             this.router.navigateByUrl('/user-company-linkages')
+                           }
+                     } ,
+               err => {
+               console.log(err);
+             // check error status code is 500 & if it is a duplicate record
+             if((err.status==500)&&(err.error.error_message)){
+               console.log(err.status)
+               this.duplicate_entry_error=true;
+               this.duplicate_entry_error_message=err.error.error_message;
+             }
+           });
     }
 }
 
